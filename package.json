@@ -2,9 +2,10 @@
   "name": "pbm2canvas",
   "version": "1.0.0",
   "description": "Converts PBM strings to canvas elements",
-  "main": "index.js",
+  "main": "dist/pbm2canvas.js",
   "scripts": {
-    "test": "npm test"
+    "start": "watchify lib/pbm2canvas.js --standalone pbm2canvas -dvo dist/pbm2canvas.js",
+    "prepublish": "browserify lib/pbm2canvas.js -o dist/pbm2canvas.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,15 @@
   "bugs": {
     "url": "https://github.com/athaeryn/pbm2canvas/issues"
   },
-  "homepage": "https://github.com/athaeryn/pbm2canvas#readme"
+  "homepage": "https://github.com/athaeryn/pbm2canvas#readme",
+  "dependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.2.0",
+    "watchify": "^3.4.0"
+  },
+  "browserify": {
+    "transform": [
+      ["babelify", { "loose": "all" }]
+    ]
+  }
 }
