@@ -1,6 +1,6 @@
 {
   "name": "pbm2canvas",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Converts PBM strings to canvas elements",
   "main": "dist/pbm2canvas.js",
   "scripts": {
@@ -28,7 +28,12 @@
   },
   "browserify": {
     "transform": [
-      ["babelify", { "loose": "all" }]
+      [
+        "babelify",
+        {
+          "loose": "all"
+        }
+      ]
     ]
   }
 }
