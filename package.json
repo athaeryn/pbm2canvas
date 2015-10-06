@@ -1,11 +1,14 @@
 {
   "name": "pbm2canvas",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Converts PBM strings to canvas elements",
-  "main": "dist/pbm2canvas.js",
+  "main": "lib/pbm2canvas.js",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
-    "start": "watchify lib/pbm2canvas.js --standalone pbm2canvas -dvo dist/pbm2canvas.js",
-    "prepublish": "browserify lib/pbm2canvas.js -o dist/pbm2canvas.js"
+    "start": "gulp",
+    "prepublish": "NODE_ENV=production gulp babel"
   },
   "repository": {
     "type": "git",
@@ -21,11 +24,7 @@
     "url": "https://github.com/athaeryn/pbm2canvas/issues"
   },
   "homepage": "https://github.com/athaeryn/pbm2canvas#readme",
-  "dependencies": {
-    "babelify": "^6.3.0",
-    "browserify": "^11.2.0",
-    "watchify": "^3.4.0"
-  },
+  "dependencies": { },
   "browserify": {
     "transform": [
       [
@@ -35,5 +34,12 @@
         }
       ]
     ]
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.2.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
