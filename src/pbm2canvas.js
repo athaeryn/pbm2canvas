@@ -6,16 +6,10 @@ function draw (canvas, {height, width, data}) {
   let ctx = canvas.getContext('2d')
   canvas.height = height
   canvas.width = width
-  let black = ctx.createImageData(1, 1)
-  let d = black.data
-  d[0] = 0
-  d[1] = 0
-  d[2] = 0
-  d[3] = 255
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       if (data[y][x] === 1) {
-        ctx.putImageData(black, x, y)
+        ctx.fillRect(x, y, 1, 1)
       }
     }
   }
