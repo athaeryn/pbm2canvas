@@ -2,9 +2,9 @@ pbm2canvas
 ==========
 
 A JavaScript library to convert
-[PBM](https://en.wikipedia.org/wiki/Netpbm_format) images to canvas.
+[Netpbm](https://en.wikipedia.org/wiki/Netpbm_format) images to canvas.
 
-First iteration will only support P1. Next maybe P4.
+Currently supporting P1 (black and white) and P2 (grayscale).
 
 # Usage
 

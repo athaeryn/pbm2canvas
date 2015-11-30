@@ -3,16 +3,17 @@ const supportedFormats = [
   'P2'
 ]
 
-function draw (canvas, { format, height, width, data, maxValue }) {
+function draw (canvas, image) {
+  let { format, height, width } = image
   let ctx = canvas.getContext('2d')
   canvas.height = height
   canvas.width = width
   switch (format) {
     case 'P1':
-      drawPBM(ctx, { height, width, data })
+      drawPBM(ctx, image)
       break
     case 'P2':
-      drawPGM(ctx, { height, width, data, maxValue })
+      drawPGM(ctx, image)
       break
   }
 }
@@ -29,7 +30,6 @@ function drawPBM (ctx, { height, width, data }) {
 
 function drawPGM (ctx, { height, width, data, maxValue }) {
   let imageData = ctx.createImageData(width, height)
-
   let pixels = imageData.data
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {

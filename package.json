@@ -1,6 +1,6 @@
 {
   "name": "pbm2canvas",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Converts Netpbm strings to canvas elements",
   "main": "lib/pbm2canvas.js",
   "files": [
