@@ -1,11 +1,23 @@
 const supportedFormats = [
-  'P1'
+  'P1',
+  'P2'
 ]
 
-function draw (canvas, {height, width, data}) {
+function draw (canvas, { format, height, width, data, maxValue }) {
   let ctx = canvas.getContext('2d')
   canvas.height = height
   canvas.width = width
+  switch (format) {
+    case 'P1':
+      drawPBM(ctx, { height, width, data })
+      break
+    case 'P2':
+      drawPGM(ctx, { height, width, data, maxValue })
+      break
+  }
+}
+
+function drawPBM (ctx, { height, width, data }) {
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       if (data[y][x] === 1) {
@@ -15,10 +27,29 @@ function draw (canvas, {height, width, data}) {
   }
 }
 
+function drawPGM (ctx, { height, width, data, maxValue }) {
+  let imageData = ctx.createImageData(width, height)
+
+  let pixels = imageData.data
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      let rawValue = data[y][x]
+      let grayValue = rawValue / maxValue * 255
+      let pixelAddress = (x + y * width) * 4
+      pixels[pixelAddress] = grayValue
+      pixels[pixelAddress + 1] = grayValue
+      pixels[pixelAddress + 2] = grayValue
+      pixels[pixelAddress + 3] = 255
+    }
+  }
+  ctx.putImageData(imageData, 0, 0)
+}
+
 //
 // {
 //   format: 'P1',
 //   comment: '# test',
+//   maxValue: 1,
 //   width: 5,
 //   height: 5,
 //   data: [
@@ -42,11 +73,27 @@ function parse (string) {
                           .slice(1)
                           .map(Number)
 
-  let data = lines
-               .slice(0, height)
-               .map(l => l.split(' ').slice(0, width).map(Number))
+  let maxValue
+  switch (format) {
+    case 'P1':
+      maxValue = 1
+      break
+    case 'P2':
+      maxValue = Number(lines.shift())
+      break
+  }
 
-  return { format, comment, width, height, data }
+  let data = lines.map(parseLine)
+
+  return { format, comment, width, height, data, maxValue }
+}
+
+function parseLine (line) {
+  return line
+    .replace(/\s+/g, '|')
+    .replace(/^\|/, '')
+    .split('|')
+    .map(Number)
 }
 
 export default function pbm2canvas (pbmString, canvas) {

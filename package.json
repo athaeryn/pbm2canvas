@@ -1,7 +1,7 @@
 {
   "name": "pbm2canvas",
-  "version": "1.1.0",
-  "description": "Converts PBM strings to canvas elements",
+  "version": "1.2.0",
+  "description": "Converts Netpbm strings to canvas elements",
   "main": "lib/pbm2canvas.js",
   "files": [
     "lib/"
@@ -15,7 +15,9 @@
     "url": "https://github.com/athaeryn/pbm2canvas.git"
   },
   "keywords": [
+    "netpbm",
     "pbm",
+    "pgm",
     "canvas"
   ],
   "author": "Mike Anderson",
